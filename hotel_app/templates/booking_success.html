@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Success</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Booking Confirmed!</h4>
+            <p>Dear <strong>{{ first_name }} {{ last_name }}</strong>, your booking for room <strong>{{ room_id }}</strong> ({{ room_name }}) is confirmed.</p>
+            <hr>
+            <p class="mb-0">Total Price: €{{ total_price }}</p>
+
+            <!-- Parking Spot Information -->
+            <p class="text-muted mt-3">
+                {% if parking_spot %}
+                    Parking spot {{ parking_spot }} is reserved for you.
+                {% else %}
+                    No parking spot as requested.
+                {% endif %}
+            </p>
+            
+            <p class="text-muted mt-3">Tariff will be deducted during checkout.</p>
+        </div>
+        
+        <!-- Go Back Button -->
+        <div class="text-center mt-4">
+            <a href="{% url 'public_homepage' %}" class="btn btn-primary">Go Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

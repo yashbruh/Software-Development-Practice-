@@ -1,0 +1,115 @@
+/* General styles remain the same */
+
+header {
+    background: url('/static/images/header-bg.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+}
+.card {
+    transition: transform 0.3s ease;
+}
+.card:hover {
+    transform: scale(1.05);
+}
+
+body {
+    background-color: #f4f4f4;
+    background-image: url("../images/hotel_image.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.form-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #082341;
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #082341;
+}
+
+
+
+p {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+a {
+    color: #0d2b4c;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Room details specific styles */
+.room-details {
+    background-color: #293646;
+    color: white;
+}
+
+.room-details h2, 
+.room-details h4, 
+.room-details strong,
+.room-details .form-label {
+    color: white;
+}
+
+.room-details .btn-primary {
+    background-color: white;
+    color: #293646;
+    border: none;
+}
+
+.room-details .btn-primary:hover {
+    background-color: #f1f1f1;
+    color: #293646;
+}
+
+.room-details a {
+    color: #f1f1f1;
+}

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ room.name }} - Room Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <style>
+        body {
+            background-color: #293646;
+            color: white;
+        }
+        .form-label, h2, h4, strong {
+            color: white;
+        }
+        .btn-primary {
+            background-color: white;
+            color: #293646;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #f1f1f1;
+            color: #293646;
+        }
+        a {
+            color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="{% static 'images/logo2.png' %}" alt="Logo" style="height: 90px;">
+               <B> <u>SRH Hotel</u></B>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'public_homepage' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about-section">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact-section">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            
+            
+        </div>
+    </nav>
+
+    <!-- Room Details Section -->
+    <div class="room-details">
+        <section class="container my-5">
+        <div class="row">
+            <!-- Room Image Carousel -->
+            <div class="col-md-6">
+                <div id="carouselRoom" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{% static 'images/rooms/kingsize_bed.png' %}" class="d-block w-100" alt="King Size Bed">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/rooms/king-room_1.png' %}" class="d-block w-100" alt="King Room Image 1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/rooms/king-room_2.png' %}" class="d-block w-100" alt="King Room Image 2">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/rooms/king-room_3.png' %}" class="d-block w-100" alt="King Room Image 3">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/rooms/suite_bathroom.jpg' %}" class="d-block w-100" alt="Suite Bathroom">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/rooms/suite_room.png' %}" class="d-block w-100" alt="Suite Room">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/rooms/villa_bathroom.jpg' %}" class="d-block w-100" alt="Villa Bathroom">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/rooms/villa_bedroom.jpg' %}" class="d-block w-100" alt="Villa Bedroom">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/rooms/villa_livingroom.jpg' %}" class="d-block w-100" alt="Villa Living Room">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/rooms/lobby.jpg' %}" class="d-block w-100" alt="Lobby">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/rooms/pool.jpg' %}" class="d-block w-100" alt="Pool">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/rooms/queensize_bed1.png' %}" class="d-block w-100" alt="Queen Size Bed 1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/rooms/queensize_bed2.png' %}" class="d-block w-100" alt="Queen Size Bed 2">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselRoom" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselRoom" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Room Information and Booking Form -->
+            <div class="col-md-6">
+                <h2>{{ room.name }}</h2>
+                <p><strong>Description:</strong> {{ room.description }}</p>
+                <p><strong>Features:</strong> {{ room.features }}</p>
+                <p><strong>Capacity:</strong> {{ room.capacity }} people</p>
+                <p>
+                    <strong>Price per night:</strong> €{{ room.price }}
+                    <br>
+                    <small style="color: #FFFDD0;">
+                        Terms and conditions: In case of cancellation, 50% of the tariff will be deducted. Cancellation should be made over the call to the hotel.
+                    </small>
+                </p>
+            
+                <!-- Booking Form -->
+                <form action="{% url 'room_details' room.id %}" method="post" class="mt-4 border p-4 rounded">
+                    {% csrf_token %}
+                    <h4>Book Your Stay</h4>
+                            
+                    <!-- First Name -->
+                    <div class="mb-3">
+                        <label for="first_name" class="form-label">First Name</label>
+                        <input type="text" name="first_name" id="first_name" class="form-control" required>
+                    </div>
+                
+                    <!-- Last Name -->
+                    <div class="mb-3">
+                        <label for="last_name" class="form-label">Last Name</label>
+                        <input type="text" name="last_name" id="last_name" class="form-control" required>
+                    </div>
+                
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" id="email" class="form-control" required>
+                    </div>
+                
+                    <!-- Phone Number -->
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="text" name="phone" id="phone" class="form-control" required>
+                    </div>
+                
+                    <!-- Check-in Date -->
+                    <div class="mb-3">
+                        <label for="check_in_date" class="form-label">Check-in Date</label>
+                        <input type="date" name="check_in_date" id="check_in_date" class="form-control" required>
+                    </div>
+                
+                    <!-- Check-out Date -->
+                    <div class="mb-3">
+                        <label for="check_out_date" class="form-label">Check-out Date</label>
+                        <input type="date" name="check_out_date" id="check_out_date" class="form-control" required>
+                    </div>
+                
+                    <!-- Number of Guests -->
+                    <div class="mb-3">
+                        <label for="guests" class="form-label">Number of Guests</label>
+                        <input type="number" name="guests" id="guests" class="form-control" min="1" max="{{ room.capacity }}" required>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="yes" id="parking_needed" name="parking_needed">
+                                <label class="form-check-label" for="parking_needed">
+                                    Would you like a parking spot?
+                                </label>
+                            </div>
+                        </div>
+                        
+                
+                    <!-- Terms and Conditions -->
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="terms" required>
+                            <label class="form-check-label" for="terms">
+                                I agree to the terms and conditions
+                            </label>
+                        </div>
+                    </div>
+                
+                    <!-- Payment Method -->
+                    <div class="mb-3">
+                        <label for="payment_method" class="form-label">Payment Method</label>
+                        <select name="payment_method" id="payment_method" class="form-control" required>
+                            <option value="">Select Payment Method</option>
+                            <option value="credit_card">Credit Card</option>
+                            <option value="debit_card">Debit Card</option>
+                        </select>
+                    </div>
+                
+                    <!-- Credit Card Details -->
+                    <div id="credit_card_details" class="payment-details" style="display: none;">
+                        <h4>Credit Card Details</h4>
+                        <div class="mb-3">
+                            <label for="credit_card_number" class="form-label">Card Number</label>
+                            <input type="text" name="credit_card_number" id="credit_card_number" class="form-control" maxlength="16" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="credit_cvv" class="form-label">CVV</label>
+                            <input type="text" name="credit_cvv" id="credit_cvv" class="form-control" maxlength="3" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="credit_expiry_date" class="form-label">Expiry Date</label>
+                            <input type="date" name="credit_expiry_date" id="credit_expiry_date" class="form-control" required>
+                        </div>
+                    </div>
+                
+                    <!-- Debit Card Details -->
+                    <div id="debit_card_details" class="payment-details" style="display: none;">
+                        <h4>Debit Card Details</h4>
+                        <div class="mb-3">
+                            <label for="debit_card_number" class="form-label">Card Number</label>
+                            <input type="text" name="debit_card_number" id="debit_card_number" class="form-control" maxlength="16" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="debit_cvv" class="form-label">CVV</label>
+                            <input type="text" name="debit_cvv" id="debit_cvv" class="form-control" maxlength="3" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="debit_expiry_date" class="form-label">Expiry Date</label>
+                            <input type="date" name="debit_expiry_date" id="debit_expiry_date" class="form-control" required>
+                        </div>
+                    </div>
+                
+                    <!-- Hidden input to send customer_id -->
+                    <input type="hidden" name="customer_id" value="{{ request.user.customuser.customer_id }}">
+                    <!-- <input type="text" name="card_number" placeholder="Card Number"> -->
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary">Book Now</button>
+                </form>
+                
+                </form>
+            </div>
+        </div>
+
+        <!-- Amenities Section -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h4>Amenities</h4>
+                <ul class="list-group list-group-flush">
+                    <p><li class="list-group-item">Free Wi-Fi</li>
+                    <li class="list-group-item">24/7 Room Service</li>
+                    <li class="list-group-item">Swimming Pool Access</li>
+                    <li class="list-group-item">Air Conditioning</li>
+                    <li class="list-group-item">Complimentary Breakfast</li></p>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <blockquote class="blockquote">
+                    <p><b>"Amazing experience! The room was spacious and the service was top-notch."</b></p>
+                    <p><img src="{% static 'images/logo2.png' %}" alt="Logo" style="height: 100px;">
+                    <p><b>SRH Hotel</b></p>
+                    <!-- Footer -->
+                    <footer class="bg-dark text-white text-center py-5">
+                        <!-- About Section -->
+                        <div id="about-section" class="container mb-4">
+                            <h3>About Us</h3>
+                            <p>At SRH Hotel, we strive to offer the best hospitality experience with world-class amenities and exceptional service.</p>
+                        </div>
+
+                        <!-- Contact Section -->
+                        <div id="contact-section" class="container">
+                            <h3>Contact Us</h3>
+                            <p>Email: support@srhhotel.com</p>
+                            <p>Phone: +123 456 7890</p>
+                            <p>Address: 123 Main Street, City, Country</p>
+                        </div>
+
+                        <!-- Footer Credit -->
+                        <p class="mt-4">&copy; 2024 SRH Hotel. All Rights Reserved.</p>
+                    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    document.getElementById('payment_method').addEventListener('change', function() {
+        const ccDetails = document.getElementById('credit_card_details');
+        const dcDetails = document.getElementById('debit_card_details');
+        const paymentMethod = this.value;
+
+        // Toggle visibility
+        ccDetails.style.display = paymentMethod === 'credit_card' ? 'block' : 'none';
+        dcDetails.style.display = paymentMethod === 'debit_card' ? 'block' : 'none';
+
+        // Manage "required" attributes
+        const ccFields = ccDetails.querySelectorAll('input');
+        const dcFields = dcDetails.querySelectorAll('input');
+
+        ccFields.forEach(field => field.required = paymentMethod === 'credit_card');
+        dcFields.forEach(field => field.required = paymentMethod === 'debit_card');
+    });
+</script>
+
+    
+</body>
+</html>
